@@ -5,7 +5,10 @@ import 'package:admin/usersdet.dart';
 import 'package:flutter/material.dart';
 import 'reports.dart';
 class AdminHomePage extends StatefulWidget {
+  const AdminHomePage({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _AdminHomePageState createState() => _AdminHomePageState();
 }
 
@@ -27,13 +30,14 @@ class _AdminHomePageState extends State<AdminHomePage> with SingleTickerProvider
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 46, 0, 59),
+      backgroundColor: const Color.fromARGB(255, 46, 0, 59),
       appBar: AppBar(
-        actions: [Icon(Icons.exit_to_app)],
+        actions: const [
+          Icon(Icons.exit_to_app)],
         automaticallyImplyLeading: false,
-        backgroundColor: Color.fromARGB(255, 1, 1, 82),
+        backgroundColor:const Color.fromARGB(255, 1, 1, 82),
         elevation: 0,
-        title: const Text('Admin',style: TextStyle(
+        title: const Text('Adlmin',style: TextStyle(
 
           fontWeight: FontWeight.w400,
           color: Color.fromARGB(184, 255, 255, 255)
@@ -45,10 +49,10 @@ class _AdminHomePageState extends State<AdminHomePage> with SingleTickerProvider
             quarterTurns: -1,
             child: TabBar(isScrollable: true,
               controller: _tabController,
-              indicatorColor: Color.fromARGB(255, 82, 0, 145),
-              labelColor: Color.fromARGB(255, 185, 63, 255),
-              unselectedLabelColor: Color.fromARGB(255, 255, 255, 255),
-              tabs:  [
+              indicatorColor: const Color.fromARGB(255, 82, 0, 145),
+              labelColor: const Color.fromARGB(255, 185, 63, 255),
+              unselectedLabelColor:const  Color.fromARGB(255, 255, 255, 255),
+              tabs: const [
                 Tab(text: 'Reports'),
                 Tab(text: 'Search Auctions'),
                 Tab(text: 'Auctions'),

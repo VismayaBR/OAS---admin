@@ -6,6 +6,7 @@ class Notifications extends StatefulWidget {
   const Notifications({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _NotificationsState createState() => _NotificationsState();
 }
 
@@ -31,22 +32,24 @@ class _NotificationsState extends State<Notifications> {
             .toList();
       });
     } catch (e) {
-      print('Error fetching users: $e');
+      // p0rint('Error fetching users: $e');
     }
   }
 
   void _onSubmit() async {
     if (message.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Please enter a message')),
+       const SnackBar(content: Text('Please enter a message')),
       );
       return;
-    }
+    } 
+
+
 
     if (_selectedOption == 'user' && _selectedUser == null) {
       // Show an error if user option is selected but no user is selected
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Please select a user')),
+       const SnackBar(content: Text('Please select a user')),
       );
       return;
     }
@@ -61,8 +64,9 @@ class _NotificationsState extends State<Notifications> {
         'notification': message.text,
         'date': formattedDate
       });
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Notification submitted successfully')),
+        const SnackBar(content: Text('Notification submitted successfully')),
       );
       message.clear();
       setState(() {
@@ -70,6 +74,7 @@ class _NotificationsState extends State<Notifications> {
         _selectedOption = 'global';
       });
     } catch (e) {
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error submitting notification: $e')),
       );
@@ -79,19 +84,19 @@ class _NotificationsState extends State<Notifications> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(133, 134, 0, 125),
+      backgroundColor: const Color.fromARGB(133, 134, 0, 125),
       body: Padding(
-        padding: const EdgeInsets.all(22.0),
+        padding: const  EdgeInsets.all(22.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Center(
+           const Center(
               child: Text(
                 'Post notifications',
                 style: TextStyle(
                   fontSize: 19,
                   fontWeight: FontWeight.w700,
-                  color: const Color.fromARGB(255, 217, 203, 255),
+                  color:  Color.fromARGB(255, 217, 203, 255),
                 ),
               ),
             ),
@@ -141,42 +146,43 @@ class _NotificationsState extends State<Notifications> {
                 ),
                 if (_selectedOption == 'user')
                   DropdownButton<String>(
-                    hint: Text('Select a user'),
-                    value: _selectedUser,
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        _selectedUser = newValue;
-                      });
-                    },
-                    items: _users.map((user) {
-                      return DropdownMenuItem<String>(
-                        value: user['name'],
-                        child: Text(user['name'] ?? 'N/A'),
-                      );
-                    }).toList(),
-                  ),
+                      hint:const Text('Select a user'),
+                      value: _selectedUser,
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          _selectedUser = newValue;
+                        });
+                      },
+
+                      items: _users.map((user) {
+                        return DropdownMenuItem<String>(
+                          value: user['name'],
+                          child: Text(user['name'] ?? 'N/A'), 
+                        );
+                      }).toList()),
               ],
             ),
             Container(
-              height: 255,
-              width: 698,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: TextFormField(
-                controller: message,
-                maxLines: null,
-                decoration: InputDecoration(
-                  hintText: '  Type here...',
-                  hintStyle: TextStyle(color: Colors.grey),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: BorderSide.none,
-                  ),
+                height
+                
+                : 255,           
+                width: 698,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
                 ),
-              ),
-            ),
+                child: TextFormField(
+                  controller: message,
+                  maxLines: null,
+                  decoration: InputDecoration(
+                    hintText: '  Type here...',
+                    hintStyle:const TextStyle(color: Colors.grey),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                )),
             Container(
               height: 39,
               width: 88,
@@ -188,7 +194,7 @@ class _NotificationsState extends State<Notifications> {
                     offset: Offset(4, 8), // Shadow position
                   ),
                 ],
-                color: Color.fromARGB(255, 255, 255, 255),
+                color: const Color.fromARGB(255, 255, 255, 255),
                 borderRadius: BorderRadiusDirectional.circular(7),
                 gradient: const LinearGradient(
                   colors: [

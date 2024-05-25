@@ -30,7 +30,7 @@ print('object');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 130, 0, 122),
+      backgroundColor:const Color.fromARGB(255, 130, 0, 122),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 1, 1, 82),
         leading: const Icon(
@@ -49,11 +49,11 @@ print('object');
       ),
       body: Card(
         shadowColor: Colors.black54,
-        color: Color.fromARGB(255, 244, 238, 214),
-        margin: EdgeInsets.symmetric(horizontal: 270.0, vertical: 94.0),
+        color: const Color.fromARGB(255, 244, 238, 214),
+        margin: const EdgeInsets.symmetric(horizontal: 270.0, vertical: 94.0),
         child: Container(
           decoration: BoxDecoration(
-            color: Color.fromARGB(255, 255, 248, 219),
+            color: const Color.fromARGB(255, 255, 248, 219),
             borderRadius: BorderRadius.circular(20),
             boxShadow: const [
               BoxShadow(
@@ -64,11 +64,11 @@ print('object');
             ],
           ),
           child: Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Text(
+               const Text(
                   'Admin Login',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -79,19 +79,19 @@ print('object');
                  TextFormField(
                   controller: email,
                   keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
+                  decoration:const InputDecoration(
                     labelText: 'Mail',
                   ),
                 ),
                  TextFormField(
                   controller:password,
                   obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Password',
                     
                   ),
                 ),
-                SizedBox(height: 20.0),
+               const SizedBox(height: 20.0),
                 GestureDetector(
                   onTap: (){
                     login();
@@ -107,7 +107,7 @@ print('object');
                             offset: Offset(4, 8), // Shadow position
                           ),
                         ],
-                        color: Color.fromARGB(255, 255, 255, 255),
+                        color:const Color.fromARGB(255, 255, 255, 255),
                         borderRadius: BorderRadiusDirectional.circular(7),
                         gradient: const LinearGradient(
                           colors: [

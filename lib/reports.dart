@@ -15,7 +15,7 @@ class _ReportsfrmuserState extends State<Reportsfrmuser> {
           await FirebaseFirestore.instance.collection('report').get();
       return querySnapshot.docs.map((doc) => doc.data()).toList();
     } catch (e) {
-      print('Error fetching data: $e');
+      // print('Error fetching data: $e');
       return [];
     }
   }
@@ -23,17 +23,17 @@ class _ReportsfrmuserState extends State<Reportsfrmuser> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(133, 134, 0, 125),
+      backgroundColor: const Color.fromARGB(133, 134, 0, 125),
       body: Center(
         child: FutureBuilder<List<Map<String, dynamic>>>(
           future: getItems(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return CircularProgressIndicator();
+              return const CircularProgressIndicator();
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return Text('No reports found');
+              return const Text('No reports found');
             }
 
             var data = snapshot.data!;
@@ -42,7 +42,7 @@ class _ReportsfrmuserState extends State<Reportsfrmuser> {
               height: 322,
               width: 633,
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 229, 190, 255),
+                color: const Color.fromARGB(255, 229, 190, 255),
                 borderRadius: BorderRadius.circular(7),
               ),
               child: SingleChildScrollView(
@@ -54,11 +54,11 @@ class _ReportsfrmuserState extends State<Reportsfrmuser> {
                       borderRadius: BorderRadius.circular(7),
                     ),
                     children: [
-                      TableRow(
+                    const  TableRow(
                         children: [
                           Center(
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding:  EdgeInsets.all(8.0),
                               child: Text(
                                 'UserName',
                                 style: TextStyle(
@@ -70,7 +70,7 @@ class _ReportsfrmuserState extends State<Reportsfrmuser> {
                           ),
                           Center(
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding:  EdgeInsets.all(8.0),
                               child: Text(
                                 'Contents',
                                 style: TextStyle(
@@ -95,7 +95,7 @@ class _ReportsfrmuserState extends State<Reportsfrmuser> {
                             ),
                           ],
                         );
-                      }).toList(),
+                      }),
                     ],
                   ),
                 ),

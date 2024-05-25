@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class _AuctionDetailsState extends State<AuctionDetails> {
           await FirebaseFirestore.instance.collection(_selectedCategory.toLowerCase()).get();
       return querySnapshot.docs.map((doc) => doc.data()).toList();
     } catch (e) {
-      print('Error fetching data: $e');
+      // print('Error fetching data: $e');
       return [];
     }
   }
@@ -25,7 +26,7 @@ class _AuctionDetailsState extends State<AuctionDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(133, 134, 0, 125),
+      backgroundColor: const Color.fromARGB(133, 134, 0, 125),
       body: Center(
         child: Column(
           children: [
@@ -43,8 +44,8 @@ class _AuctionDetailsState extends State<AuctionDetails> {
                       });
                     },
                   ),
-                  Text('Items',style: TextStyle(color: Colors.white),),
-                  SizedBox(width: 20),
+                 const Text('Items',style: TextStyle(color: Colors.white),),
+                 const SizedBox(width: 20),
                   Radio<String>(
                     value: 'Services',
                     groupValue: _selectedCategory,
@@ -54,7 +55,7 @@ class _AuctionDetailsState extends State<AuctionDetails> {
                       });
                     },
                   ),
-                  Text('Services',style: TextStyle(color: Colors.white),),
+                 const Text('Services',style: TextStyle(color: Colors.white),),
                 ],
               ),
             ),
@@ -62,11 +63,11 @@ class _AuctionDetailsState extends State<AuctionDetails> {
               future: getItems(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
+                  return const CircularProgressIndicator();
                 } else if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}');
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return Text('No data found');
+                  return const Text('No data found');
                 }
             
                 var data = snapshot.data!;
@@ -75,7 +76,7 @@ class _AuctionDetailsState extends State<AuctionDetails> {
                   height: 422,
                   width: 633,
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 229, 190, 255),
+                    color: const Color.fromARGB(255, 229, 190, 255),
                     borderRadius: BorderRadius.circular(7),
                   ),
                   child: SingleChildScrollView(
@@ -87,11 +88,11 @@ class _AuctionDetailsState extends State<AuctionDetails> {
                           borderRadius: BorderRadius.circular(7),
                         ),
                         children: [
-                          TableRow(
+                          const TableRow(
                             children: [
                               Center(
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding:  EdgeInsets.all(8.0),
                                   child: Text(
                                     'Name',
                                     style: TextStyle(
@@ -103,7 +104,7 @@ class _AuctionDetailsState extends State<AuctionDetails> {
                               ),
                               Center(
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding:  EdgeInsets.all(8.0),
                                   child: Text(
                                     'Details',
                                     style: TextStyle(
@@ -128,7 +129,7 @@ class _AuctionDetailsState extends State<AuctionDetails> {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      Text('Summary'),
+                                    const  Text('Summary'),
                                       SizedBox(
                                         width: 250,
                                         child: Text(item['summary'] ?? 'N/A'),
@@ -136,14 +137,14 @@ class _AuctionDetailsState extends State<AuctionDetails> {
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text('Starting amount'),
-                                          Text(item['amount'].toString() ?? 'N/A'),
+                                         const Text('Starting amount'),
+                                          Text(item['amount'].toString()),
                                         ],
                                       ),
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text('Ending date'),
+                                         const Text('Ending date'),
                                           Text(item['duration'] ?? 'N/A'),
                                         ],
                                       ),
@@ -152,7 +153,7 @@ class _AuctionDetailsState extends State<AuctionDetails> {
                                 ),
                               ],
                             );
-                          }).toList(),
+                          }),
                         ],
                       ),
                     ),

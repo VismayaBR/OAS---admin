@@ -21,7 +21,7 @@ class _SearchAnyState extends State<SearchAny> {
         return data;
       }).toList();
     } catch (e) {
-      print('Error fetching data: $e');
+      // print('Error fetching data: $e');
       return [];
     }
   }
@@ -29,17 +29,17 @@ class _SearchAnyState extends State<SearchAny> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(133, 134, 0, 125),
+      backgroundColor:const Color.fromARGB(133, 134, 0, 125),
       body: Center(
         child: FutureBuilder<List<Map<String, dynamic>>>(
           future: getItems(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return CircularProgressIndicator();
+              return const CircularProgressIndicator();
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return Text('No reports found');
+              return const Text('No reports found');
             }
 
             var data = snapshot.data!;
@@ -48,7 +48,7 @@ class _SearchAnyState extends State<SearchAny> {
               height: 422,
               width: 633,
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 229, 190, 255),
+                color: const Color.fromARGB(255, 229, 190, 255),
                 borderRadius: BorderRadius.circular(7),
               ),
               child: SingleChildScrollView(
@@ -60,11 +60,11 @@ class _SearchAnyState extends State<SearchAny> {
                       borderRadius: BorderRadius.circular(7),
                     ),
                     children: [
-                      TableRow(
+                     const TableRow(
                         children: [
                           Center(
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding:  EdgeInsets.all(8.0),
                               child: Text(
                                 'Bidding item',
                                 style: TextStyle(
@@ -76,7 +76,7 @@ class _SearchAnyState extends State<SearchAny> {
                           ),
                           Center(
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding:  EdgeInsets.all(8.0),
                               child: Text(
                                 'Bid amount',
                                 style: TextStyle(
@@ -88,7 +88,7 @@ class _SearchAnyState extends State<SearchAny> {
                           ),
                           Center(
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding:  EdgeInsets.all(8.0),
                               child: Text(
                                 'User',
                                 style: TextStyle(
@@ -100,7 +100,7 @@ class _SearchAnyState extends State<SearchAny> {
                           ),
                           Center(
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding:  EdgeInsets.all(8.0),
                               child: Text(
                                 'Announce winner',
                                 style: TextStyle(
@@ -122,11 +122,11 @@ class _SearchAnyState extends State<SearchAny> {
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text(item['bid'].toString() ?? 'N/A'),
+                              child: Text(item['bid'].toString()),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text(item['username'].toString() ?? 'N/A'),
+                              child: Text(item['username'].toString()),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -136,7 +136,7 @@ class _SearchAnyState extends State<SearchAny> {
                                       ? Colors.green
                                       : null,
                                 ),
-                                child: Text('Won'),
+                                child: const Text('Won'),
                                 onPressed: () {
                                   FirebaseFirestore.instance
                                       .collection('winner')
@@ -153,7 +153,7 @@ class _SearchAnyState extends State<SearchAny> {
                             ),
                           ],
                         );
-                      }).toList(),
+                      }),
                     ],
                   ),
                 ),
