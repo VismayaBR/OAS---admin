@@ -29,7 +29,7 @@ class _SearchAnyState extends State<SearchAny> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:const Color.fromARGB(133, 134, 0, 125),
+      backgroundColor: const Color.fromARGB(133, 134, 0, 125),
       body: Center(
         child: FutureBuilder<List<Map<String, dynamic>>>(
           future: getItems(),
@@ -60,11 +60,11 @@ class _SearchAnyState extends State<SearchAny> {
                       borderRadius: BorderRadius.circular(7),
                     ),
                     children: [
-                     const TableRow(
+                      const TableRow(
                         children: [
                           Center(
                             child: Padding(
-                              padding:  EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(8.0),
                               child: Text(
                                 'Bidding item',
                                 style: TextStyle(
@@ -76,7 +76,7 @@ class _SearchAnyState extends State<SearchAny> {
                           ),
                           Center(
                             child: Padding(
-                              padding:  EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(8.0),
                               child: Text(
                                 'Bid amount',
                                 style: TextStyle(
@@ -88,7 +88,7 @@ class _SearchAnyState extends State<SearchAny> {
                           ),
                           Center(
                             child: Padding(
-                              padding:  EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(8.0),
                               child: Text(
                                 'User',
                                 style: TextStyle(
@@ -100,7 +100,7 @@ class _SearchAnyState extends State<SearchAny> {
                           ),
                           Center(
                             child: Padding(
-                              padding:  EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(8.0),
                               child: Text(
                                 'Announce winner',
                                 style: TextStyle(
@@ -132,19 +132,31 @@ class _SearchAnyState extends State<SearchAny> {
                               padding: const EdgeInsets.all(8.0),
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: _clickedItems.contains(itemId)
-                                      ? Colors.green
-                                      : null,
+                                  backgroundColor:
+                                      _clickedItems.contains(itemId)
+                                          ? Colors.green
+                                          : null,
                                 ),
                                 child: const Text('Won'),
-                                onPressed: () {
+                                onPressed: () async {
                                   FirebaseFirestore.instance
                                       .collection('winner')
                                       .add({
                                     'user': item['username'],
                                     'item': item['name'],
                                     'bid': item['bid'],
+                                    'mobile': item['mobile']
                                   });
+                                  QuerySnapshot querySnapshot =
+                                      await FirebaseFirestore.instance
+                                          .collection('items')
+                                          .where('title',
+                                              isEqualTo: item['name'])
+                                          .get();
+
+                                  for (var doc in querySnapshot.docs) {
+                                    await doc.reference.update({'status': '1'});
+                                  }
                                   setState(() {
                                     _clickedItems.add(itemId);
                                   });
