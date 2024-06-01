@@ -157,6 +157,16 @@ class _SearchAnyState extends State<SearchAny> {
                                   for (var doc in querySnapshot.docs) {
                                     await doc.reference.update({'status': '1'});
                                   }
+                                    QuerySnapshot querySnapshot1 =
+                                      await FirebaseFirestore.instance
+                                          .collection('services')
+                                          .where('title',
+                                              isEqualTo: item['name'])
+                                          .get();
+
+                                  for (var doc in querySnapshot1.docs) {
+                                    await doc.reference.update({'status': '1'});
+                                  }
                                   setState(() {
                                     _clickedItems.add(itemId);
                                   });
